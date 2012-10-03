@@ -2,7 +2,7 @@
 "     File Name           :     autoHEADER.vim
 "     Created By          :     shanzi
 "     Creation Date       :     [2012-10-03 23:53]
-"     Last Modified       :     [2012-10-04 01:56]
+"     Last Modified       :     [2012-10-04 02:01]
 "     Description         :     Auto insert comment header block for varies
 "                               programing language
 "--------------------------------------------------------------------------------
@@ -19,7 +19,7 @@ let s:style_list = [
 
 fun! s:put_msg_line(start_char,key,value)
     exe "normal o"
-    exe "normal $c0" . a:start_char . repeat(' ',5) 
+    exe "normal 0c$" . a:start_char . repeat(' ',5) 
                 \ . printf('%-20s:     %s',a:key,a:value)
 endfun
 
@@ -77,7 +77,7 @@ fun! s:insert_header_with_ext(ext)
 
             " end of comment segment
             exe "normal o"
-            exe 'normal $c0' . style[1]
+            exe 'normal 0c$' . style[1]
                         \ . repeat(style[3],g:code_header_fill_char_repeat)
                         \ . style[2]         
             exe 'normal o'
