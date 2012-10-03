@@ -2,7 +2,7 @@
 *     File Name           :     README.md
 *     Created By          :     shanzi
 *     Creation Date       :     [2012-10-04 01:10]
-*     Last Modified       :     [2012-10-04 01:32]
+*     Last Modified       :     [2012-10-04 01:44]
 *     Description         :     Introduction to autoHEADER
 *********************************************************************************-->
 
@@ -23,6 +23,16 @@ For example, a typical python comment header block may be like this:
     #     Last Modified       :     [AUTO_UPDATE_BEFORE_SAVE]
     #     Description         :     
     #################################################################################
+
+## Install
+
+To install you can just clone or download the source code and put extract to your `.vim` folder. 
+But the recommended way to install autoHEADER is through [vundle](https://github.com/gmarik/vundle).
+Just add the following line into your `.vimrc` :
+
+    Bundle 'yuner/autoHEADER'     "autoHEADER
+
+And then run command `:BundleInstall`
 
 ## Usage
 
