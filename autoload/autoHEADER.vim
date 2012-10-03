@@ -2,7 +2,7 @@
 "     File Name           :     autoHEADER.vim
 "     Created By          :     shanzi
 "     Creation Date       :     [2012-10-03 23:53]
-"     Last Modified       :     [AUTO_UPDATE_BEFORE_SAVE]
+"     Last Modified       :     [2012-10-04 01:05]
 "     Description         :     Auto insert comment header block for varies
 "                               programing language
 "--------------------------------------------------------------------------------
@@ -17,14 +17,14 @@ let s:style_list = [
 \    { 'style' : ['---[[' , ''  , '---]]' , ''  ]  , 'ext' : [ 'lua' ]},
 \]
 
-fun s:put_msg_line(start_char,key,value)
+fun! s:put_msg_line(start_char,key,value)
     exe "normal o"
     exe "normal cc" . a:start_char . repeat(' ',5) 
                 \ . printf('%-20s:     %s',a:key,a:value)
 endfun
 
 
-fun s:insert_header_with_ext(ext)
+fun! s:insert_header_with_ext(ext)
     for styledict in s:style_list
         let extlist = get(styledict,'ext')
         let indexofext = index(extlist, a:ext)
@@ -91,8 +91,12 @@ fun s:insert_header_with_ext(ext)
 endfun
 
 
-fun autoHEADER#make_header()
+fun! autoHEADER#make_header()
     let s:filename=expand('%')
     let s:ext=tolower(substitute(s:filename,'^.\+\.\(\w\+\)$','\1',''))
     call s:insert_header_with_ext(s:ext)
+endfun
+
+fun! autoHEADER#update_modified_time()
+    exe "1,10s/\\(Last Modified\\s\\+:\\s\\+\\)\\[[^\\]]\\+\\]/\\1[" . strftime("%Y-%m-%d %H:%M") . "]/" 
 endfun

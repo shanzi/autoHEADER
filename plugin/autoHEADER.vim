@@ -1,3 +1,11 @@
+"--------------------------------------------------------------------------------
+"     File Name           :     autoHEADER.vim
+"     Created By          :     shanzi
+"     Creation Date       :     [2012-10-04 01:07]
+"     Last Modified       :     [2012-10-04 01:07]
+"     Description         :     Envoke autoHEADER and define command
+"--------------------------------------------------------------------------------
+
 if exists('g:autoHEADER_loaded')
     finish
 endif
@@ -23,9 +31,10 @@ if g:autoHEADER_auto_enable
     augroup autoHEADER
         autocmd!
         autocmd BufNewFile *.* call autoHEADER#make_header()
+        autocmd Bufwritepre,filewritepre *.* call autoHEADER#update_modified_time()
     augroup END
 endif
 
 
-command AutoHeader autoHEADER#make_header()
+command AutoHeader call autoHEADER#make_header()
 let g:autoHEADER_loaded=1.0
