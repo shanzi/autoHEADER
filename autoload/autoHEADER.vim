@@ -2,7 +2,7 @@
 "     File Name           :     autoHEADER.vim
 "     Created By          :     shanzi
 "     Creation Date       :     [2012-10-03 23:53]
-"     Last Modified       :     [2012-10-04 01:05]
+"     Last Modified       :     [2012-10-04 01:36]
 "     Description         :     Auto insert comment header block for varies
 "                               programing language
 "--------------------------------------------------------------------------------
@@ -97,6 +97,24 @@ fun! autoHEADER#make_header()
     call s:insert_header_with_ext(s:ext)
 endfun
 
+fun! autoHEADER#enable()
+    augroup autoHEADER
+        autocmd!
+        autocmd BufNewFile *.* call autoHEADER#make_header()
+        autocmd Bufwritepre,filewritepre *.* call autoHEADER#update_modified_time()
+    augroup END
+endfun
+
+fun! autoHEADER#disable()
+    augroup autoHEADER
+        autocmd!
+    augroup END
+endfun
+
+
+
 fun! autoHEADER#update_modified_time()
+    exe "normal ma"
     exe "1,10s/\\(Last Modified\\s\\+:\\s\\+\\)\\[[^\\]]\\+\\]/\\1[" . strftime("%Y-%m-%d %H:%M") . "]/" 
+    exe "normal `a"
 endfun

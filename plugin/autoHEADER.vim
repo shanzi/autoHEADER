@@ -2,7 +2,7 @@
 "     File Name           :     autoHEADER.vim
 "     Created By          :     shanzi
 "     Creation Date       :     [2012-10-04 01:07]
-"     Last Modified       :     [2012-10-04 01:07]
+"     Last Modified       :     [2012-10-04 01:29]
 "     Description         :     Envoke autoHEADER and define command
 "--------------------------------------------------------------------------------
 
@@ -28,13 +28,11 @@ endif
 
 
 if g:autoHEADER_auto_enable
-    augroup autoHEADER
-        autocmd!
-        autocmd BufNewFile *.* call autoHEADER#make_header()
-        autocmd Bufwritepre,filewritepre *.* call autoHEADER#update_modified_time()
-    augroup END
+    call autoHEADER#enable()
 endif
 
 
 command AutoHeader call autoHEADER#make_header()
+command AutoHeaderEnable call autoHEADER#enable()
+command AutoHeaderDisable call autoHEADER#disable()
 let g:autoHEADER_loaded=1.0
