@@ -2,7 +2,7 @@
 "     File Name           :     autoHEADER.vim
 "     Created By          :     shanzi
 "     Creation Date       :     [2012-10-03 23:53]
-"     Last Modified       :     [2012-10-04 23:45]
+"     Last Modified       :     [2012-10-05 00:21]
 "     Description         :     Auto insert comment header block for varies
 "                               programing language
 "--------------------------------------------------------------------------------
@@ -50,9 +50,9 @@ fun! s:insert_header_with_ft(ft)
                         \ ['Licence' , g:autoHEADER_default_licence],
                         \ ['Description' , ' '],]
 
-            if type(prefix) == 4 && len(prefix) 
+            if  type(prefix) == type({})
                 let prefix_by_ft = get(prefix,a:ft)
-                if len(prefix_by_ft)
+                if  type(prefix_by_ft)==type('') && len(prefix_by_ft)>0
                     call append(0 , prefix_by_ft)
                     let start_line += 1
                 endif
@@ -75,9 +75,9 @@ fun! s:insert_header_with_ft(ft)
             let start_line += 1
 
             " appendix
-            if type(appendix) && len(appendix)
+            if type(appendix)==type({})
                 let appendix_by_ft = get(appendix,a:ft)
-                if len(appendix_by_ft)
+                if type(appendix_by_ft)==type('') && len(appendix_by_ft)
                     call append(start_line,appendix_by_ft)
                 endif
             endif
