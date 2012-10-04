@@ -2,7 +2,7 @@
 "     File Name           :     autoHEADER.vim
 "     Created By          :     shanzi
 "     Creation Date       :     [2012-10-03 23:53]
-"     Last Modified       :     [2012-10-04 02:01]
+"     Last Modified       :     [2012-10-04 21:39]
 "     Description         :     Auto insert comment header block for varies
 "                               programing language
 "--------------------------------------------------------------------------------
@@ -24,7 +24,7 @@ fun! s:put_msg_line(start_char,key,value)
 endfun
 
 
-fun! s:insert_header_with_ext(ext)
+fun! s:insert_header_with_ext(ext)   
     for styledict in s:style_list
         let extlist = get(styledict,'ext')
         let indexofext = index(extlist, a:ext)
@@ -73,7 +73,8 @@ fun! s:insert_header_with_ext(ext)
             endif
 
             " + Description
-            call s:put_msg_line(start_char,'Description','')
+            call s:put_msg_line(start_char,'Description',' ')
+            let description_edit_pos = getpos('.')                   " save pos
 
             " end of comment segment
             exe "normal o"
@@ -82,8 +83,9 @@ fun! s:insert_header_with_ext(ext)
                         \ . style[2]         
             exe 'normal o'
             exe 'normal cc'
-            exe 'normal 2k$'
-
+            
+            " restore cursor pos
+            call setpos('.',description_edit_pos)
             return 1
         endif
     endfor
@@ -114,7 +116,7 @@ endfun
 
 
 fun! autoHEADER#update_modified_time()
-    exe "normal ma"
+    let cursor_pos = getpos('.')
     exe "1,10s/\\(Last Modified\\s\\+:\\s\\+\\)\\[[^\\]]\\+\\]/\\1[" . strftime("%Y-%m-%d %H:%M") . "]/" 
-    exe "normal `a"
+    call setpos('.',cursor_pos)
 endfun
