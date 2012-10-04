@@ -2,7 +2,7 @@
 "     File Name           :     autoHEADER.vim
 "     Created By          :     shanzi
 "     Creation Date       :     [2012-10-03 23:53]
-"     Last Modified       :     [2012-10-05 00:21]
+"     Last Modified       :     [2012-10-05 00:31]
 "     Description         :     Auto insert comment header block for varies
 "                               programing language
 "--------------------------------------------------------------------------------
@@ -117,6 +117,6 @@ endfun
 
 fun! autoHEADER#update_modified_time()
     let cursor_pos = getpos('.')
-    exe "1,10s/\\(Last Modified\\s\\+:\\s\\+\\)\\[[^\\]]\\+\\]/\\1[" . strftime("%Y-%m-%d %H:%M") . "]/" 
+    silent! exe "1,10s/\\(Last Modified\\s\\+:\\s\\+\\)\\[[^\\]]\\+\\]/\\1[" . strftime("%Y-%m-%d %H:%M") . "]/" 
     call setpos('.',cursor_pos)
 endfun
