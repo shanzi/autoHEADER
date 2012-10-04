@@ -26,7 +26,7 @@ For example, a typical python comment header block may like this:
 
 ## Install
 
-To install you can just clone or download the source code and put extract to your `.vim` folder. 
+To install you can just clone or download the source code and extract into your `.vim` folder. 
 But the recommended way to install autoHEADER is through [vundle](https://github.com/gmarik/vundle).
 Just add the following line into your `.vimrc` :
 
@@ -41,7 +41,6 @@ a new file with `vim newfile.py` in console , or `:e new.vim` in vim.
 
 You can also invoke the function by hand with command `:AutoHeader`
 
-
 By default autoHEADER enables itself the moment vim launches, you can cancel this by adding
 `let g:autoHEADER_auto_enable=0` to your `.vimrc` file.
 
@@ -52,8 +51,8 @@ To enable or disable autoHEADER by hand , use `:AutoHeaderEnable` and `:AutoHead
 1. `g:autoHEADER_auto_enable`
     Decide whether autoHEADER auto loaded when vim launches, default is 1.
 2. `g:autoHEADER_default_author`
-    The default author displayed follows _Creation By_ , the default value is 
-    value of your $USER environment varible.
+    The default author name displayed follows _Creation By_ , the default value is
+    your $USER environment varible.
 3. `g:autoHEADER_default_licence`
     Default licence for new source file. the place holder is "all right reserved"
 4. `g:autoHEADER_fill_char_count`
@@ -61,9 +60,9 @@ To enable or disable autoHEADER by hand , use `:AutoHeaderEnable` and `:AutoHead
     The default value is 80.
 
 
-## Lisence
+## Licence
 
-    autoHEADER - a vim plugin makes it easier to insert comment header blocks
+    autoHEADER - a vim plugin auto insert comment header blocks
 
     Copyright (C) 2012 shanzi
     All rights reserved.
