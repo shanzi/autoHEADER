@@ -2,7 +2,7 @@
 *     File Name           :     README.md
 *     Created By          :     shanzi
 *     Creation Date       :     [2012-10-04 01:10]
-*     Last Modified       :     [2012-10-05 00:03]
+*     Last Modified       :     [2012-10-05 00:08]
 *     Description         :     Introduction to autoHEADER
 *********************************************************************************-->
 
@@ -49,7 +49,7 @@ To enable or disable autoHEADER by hand , use `:AutoHeaderEnable` and `:AutoHead
 ## Config
 
 1. `g:autoHEADER_auto_enable`
-    Decide whether autoHEADER auto loaded when vim launches, default is 1.
+    Decide whether autoHEADER will be auto loaded when vim launches, default is 1.
 2. `g:autoHEADER_default_author`
     The default author name displayed follows _Creation By_ , the default value is
     your $USER environment varible.
