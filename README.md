@@ -2,7 +2,7 @@
 *     File Name           :     README.md
 *     Created By          :     shanzi
 *     Creation Date       :     [2012-10-04 01:10]
-*     Last Modified       :     [2012-10-05 00:08]
+*     Last Modified       :     [2012-10-05 00:10]
 *     Description         :     Introduction to autoHEADER
 *********************************************************************************-->
 
@@ -55,8 +55,8 @@ To enable or disable autoHEADER by hand , use `:AutoHeaderEnable` and `:AutoHead
     your $USER environment varible.
 3. `g:autoHEADER_default_licence`
     Default licence for new source file. the place holder is "all right reserved"
-4. `g:autoHEADER_fill_char_count`
-    Count of chars that repeat at the begining and in the end of the comment.
+4. `g:autoHEADER_fill_char_repeat`
+    Repeat of chars on top and at bottom of the comment block.
     The default value is 80.
 
 
