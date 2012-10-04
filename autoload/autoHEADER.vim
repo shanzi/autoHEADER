@@ -2,7 +2,7 @@
 "     File Name           :     autoHEADER.vim
 "     Created By          :     shanzi
 "     Creation Date       :     [2012-10-03 23:53]
-"     Last Modified       :     [2012-10-04 23:32]
+"     Last Modified       :     [2012-10-04 23:45]
 "     Description         :     Auto insert comment header block for varies
 "                               programing language
 "--------------------------------------------------------------------------------
@@ -32,22 +32,6 @@ let s:style_list = [
             \]
 
 
-fun! s:get_user()
-    if exists('g:autoHEADER_default_author')
-        return g:autoHEADER_default_author
-    else
-        return $USER
-    endif
-endfun
-
-fun! s:get_licence()
-    if exists('g:autoHEADER_default_licence')
-        return g:autoHEADER_default_licence
-    else
-        return (s:get_user() . ' (c) ' . strftime('%Y')  . '| all rights reserved')
-    endif
-endfun
-
 fun! s:insert_header_with_ft(ft)   
     for styledict in s:style_list
         let ftlist = get(styledict,'ft')
@@ -60,10 +44,10 @@ fun! s:insert_header_with_ft(ft)
             let start_line = 0
 
             let messages=[['File Name' , s:filename],
-                        \ ['Created By' , s:get_user()],
+                        \ ['Created By' , g:autoHEADER_default_author],
                         \ ['Creation Date' , '[' . strftime("%Y-%m-%d %H:%M") . ']'],
                         \ ['Last Modified' , '[AUTO_UPDATE_BEFORE_SAVE]'],
-                        \ ['Licence' , s:get_licence()],
+                        \ ['Licence' , g:autoHEADER_default_licence],
                         \ ['Description' , ' '],]
 
             if type(prefix) == 4 && len(prefix) 
