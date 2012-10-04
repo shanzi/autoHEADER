@@ -2,7 +2,7 @@
 *     File Name           :     README.md
 *     Created By          :     shanzi
 *     Creation Date       :     [2012-10-04 01:10]
-*     Last Modified       :     [2012-10-04 23:55]
+*     Last Modified       :     [2012-10-05 00:03]
 *     Description         :     Introduction to autoHEADER
 *********************************************************************************-->
 
@@ -12,7 +12,7 @@
 ## Introduction
 
 autoHEADER is a vim helper plugin for easier inserting comment header block contains varies of infomation.
-For example, a typical python comment header block may be like this:
+For example, a typical python comment header block may like this:
 
 
     #! /usr/bin/env python
