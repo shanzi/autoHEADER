@@ -2,7 +2,7 @@
 "     File Name           :     autoHEADER.vim
 "     Created By          :     shanzi
 "     Creation Date       :     [2012-10-03 23:53]
-"     Last Modified       :     [2012-10-04 21:39]
+"     Last Modified       :     [2012-10-04 23:32]
 "     Description         :     Auto insert comment header block for varies
 "                               programing language
 "--------------------------------------------------------------------------------
@@ -10,82 +10,99 @@
 
 
 let s:style_list = [
-\    { 'style' : ['/*' , '*' , '*/' , '*' ] , 'ext' : [ 'c' , 'java' , 'cpp' , 'js' , 'h' , 'go' ] , },
-\    { 'style' : ['#'  , '#' , ''  , '#' ] , 'ext' : [ 'py' , 'rb', 'pl' , 'sh' ] , 'prefix' : g:autoheader_script_prefix },
-\    { 'style' : ['"'  , '"' , ''  , '-' ] , 'ext' : [ 'vim' , 'tex' ] },
-\    { 'style' : ['<!--'  , '*' , '-->'   , '*' ] , 'ext' : [ 'html' , 'md' ] },
-\    { 'style' : ['---[[' , ''  , '---]]' , ''  ]  , 'ext' : [ 'lua' ]},
-\]
+            \    { 'style' : ['/*' , '*' , '*/' , '*' ] , 'ft' : [ 'c' , 'java' , 'cpp' , 'javascript' , 'go' , 'php' , 'jsp' ] , 
+            \      'prefix' : {
+            \                 'php' : '<?php',
+            \                 'jsp' : '<%',
+            \                 },
+            \      'appendix' : {
+            \                 'php' : '?>',
+            \                 'jsp' : '%>',
+            \                 }},
+            \    { 'style' : ['#'  , '#' , ''  , '#' ] , 'ft' : [ 'python' , 'ruby', 'perl' , 'sh' ] , 
+            \      'prefix' : {
+            \                 'python' : '#! /usr/bin/env python',
+            \                 'ruby' : '#! /usr/bin/env ruby',
+            \                 'perl' : '#! /usr/bin/env perl',
+            \                 'sh' : '#! /bin/bash',
+            \                   }},
+            \    { 'style' : ['"'  , '"' , ''  , '-' ] , 'ft' : [ 'vim' , 'tex' ] },
+            \    { 'style' : ['<!--'  , '*' , '-->'   , '*' ] , 'ft' : [ 'html' , 'md' ] },
+            \    { 'style' : ['---[[' , ''  , '---]]' , ''  ]  , 'ft' : [ 'lua' ]},
+            \]
 
-fun! s:put_msg_line(start_char,key,value)
-    exe "normal o"
-    exe "normal 0c$" . a:start_char . repeat(' ',5) 
-                \ . printf('%-20s:     %s',a:key,a:value)
+
+fun! s:get_user()
+    if exists('g:autoHEADER_default_author')
+        return g:autoHEADER_default_author
+    else
+        return $USER
+    endif
 endfun
 
+fun! s:get_licence()
+    if exists('g:autoHEADER_default_licence')
+        return g:autoHEADER_default_licence
+    else
+        return (s:get_user() . ' (c) ' . strftime('%Y')  . '| all rights reserved')
+    endif
+endfun
 
-fun! s:insert_header_with_ext(ext)   
+fun! s:insert_header_with_ft(ft)   
     for styledict in s:style_list
-        let extlist = get(styledict,'ext')
-        let indexofext = index(extlist, a:ext)
-        if indexofext >= 0
+        let ftlist = get(styledict,'ft')
+        let indexofft = index(ftlist, a:ft)
+        if indexofft >= 0
             let style = get(styledict,'style')
             let prefix = get(styledict,'prefix')
+            let appendix = get(styledict,'appendix')
+            let start_char = style[1]
+            let start_line = 0
 
-            " Jump to line 1
-            exe 'normal ggO'                                
+            let messages=[['File Name' , s:filename],
+                        \ ['Created By' , s:get_user()],
+                        \ ['Creation Date' , '[' . strftime("%Y-%m-%d %H:%M") . ']'],
+                        \ ['Last Modified' , '[AUTO_UPDATE_BEFORE_SAVE]'],
+                        \ ['Licence' , s:get_licence()],
+                        \ ['Description' , ' '],]
 
             if type(prefix) == 4 && len(prefix) 
-
-                let prefix_by_ext = get(prefix,a:ext)
-                if len(prefix_by_ext)
-                    exe 'normal i' . prefix_by_ext 
-                    exe 'normal o'
+                let prefix_by_ft = get(prefix,a:ft)
+                if len(prefix_by_ft)
+                    call append(0 , prefix_by_ft)
+                    let start_line += 1
                 endif
             endif
-            
-            " Begining of the comment block
-            exe "normal i" . style[0]
-                        \ . repeat(style[3],g:code_header_fill_char_repeat)
 
-            " Message Segment
-            let start_char = style[1]
-            
-            " + File Name
-            call s:put_msg_line(start_char,'File Name',s:filename)
+            " start of comment block
+            call append(start_line, style[0] . repeat(style[3], g:autoHEADER_fill_char_repeat))
+            let start_line += 1
 
-            " + Created By
-            if exists('g:autoheader_default_author')
-                call s:put_msg_line(start_char,'Created By',g:autoheader_default_author)
-            else
-                call s:put_msg_line(start_char,'Created By', $USER)
+            for message in messages
+                call append(start_line, start_char . repeat(' ',5) . printf('%-20s:     %s',get(message,0),get(message,1)))
+                let start_line += 1
+            endfor
+
+            " save cursor pos
+            let endline = start_line
+
+            " end of comment block
+            call append(start_line,start_char . repeat(style[3], g:autoHEADER_fill_char_repeat) . style[2])
+            let start_line += 1
+
+            " appendix
+            if type(appendix) && len(appendix)
+                let appendix_by_ft = get(appendix,a:ft)
+                if len(appendix_by_ft)
+                    call append(start_line,appendix_by_ft)
+                endif
             endif
 
-            " + Creation Date
-            call s:put_msg_line(start_char,'Creation Date','[' . strftime("%Y-%m-%d %H:%M") . ']')
-
-            " + Last Modified
-            call s:put_msg_line(start_char,'Last Modified','[AUTO_UPDATE_BEFORE_SAVE]')
-
-            " + LICENCE
-            if exists('g:autoheader_default_licence')
-                call s:put_msg_line(start_char,'LICENCE',g:autoheader_default_licence)
-            endif
-
-            " + Description
-            call s:put_msg_line(start_char,'Description',' ')
-            let description_edit_pos = getpos('.')                   " save pos
-
-            " end of comment segment
-            exe "normal o"
-            exe 'normal 0c$' . style[1]
-                        \ . repeat(style[3],g:code_header_fill_char_repeat)
-                        \ . style[2]         
-            exe 'normal o'
-            exe 'normal cc'
+            call append(start_line+1,'')
             
-            " restore cursor pos
-            call setpos('.',description_edit_pos)
+            " restore line
+            call cursor(endline,0)
+            exe "normal $"
             return 1
         endif
     endfor
@@ -95,8 +112,7 @@ endfun
 
 fun! autoHEADER#make_header()
     let s:filename=expand('%')
-    let s:ext=tolower(substitute(s:filename,'^.\+\.\(\w\+\)$','\1',''))
-    call s:insert_header_with_ext(s:ext)
+    call s:insert_header_with_ft(&ft)
 endfun
 
 fun! autoHEADER#enable()
