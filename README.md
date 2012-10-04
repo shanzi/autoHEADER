@@ -2,7 +2,7 @@
 *     File Name           :     README.md
 *     Created By          :     shanzi
 *     Creation Date       :     [2012-10-04 01:10]
-*     Last Modified       :     [2012-10-04 01:49]
+*     Last Modified       :     [2012-10-04 23:55]
 *     Description         :     Introduction to autoHEADER
 *********************************************************************************-->
 
@@ -46,6 +46,20 @@ By default autoHEADER enables itself the moment vim launches, you can cancel thi
 `let g:autoHEADER_auto_enable=0` to your `.vimrc` file.
 
 To enable or disable autoHEADER by hand , use `:AutoHeaderEnable` and `:AutoHeaderDisable` .
+
+## Config
+
+1. `g:autoHEADER_auto_enable`
+    Decide whether autoHEADER auto loaded when vim launches, default is 1.
+2. `g:autoHEADER_default_author`
+    The default author displayed follows _Creation By_ , the default value is 
+    value of your $USER environment varible.
+3. `g:autoHEADER_default_licence`
+    Default licence for new source file. the place holder is "all right reserved"
+4. `g:autoHEADER_fill_char_count`
+    Count of chars that repeat at the begining and in the end of the comment.
+    The default value is 80.
+
 
 ## Lisence
 
