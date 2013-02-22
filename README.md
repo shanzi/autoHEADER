@@ -2,7 +2,7 @@
 *     File Name           :     README.md
 *     Created By          :     shanzi
 *     Creation Date       :     [2012-10-04 01:10]
-*     Last Modified       :     [2012-10-05 00:10]
+*     Last Modified       :     [2013-02-22 22:33]
 *     Description         :     Introduction to autoHEADER
 *********************************************************************************-->
 
@@ -30,7 +30,7 @@ To install you can just clone or download the source code and extract into your 
 But the recommended way to install autoHEADER is through [vundle](https://github.com/gmarik/vundle).
 Just add the following line into your `.vimrc` :
 
-    Bundle 'yuner/autoHEADER'     "autoHEADER
+    Bundle 'shanzi/autoHEADER'     "autoHEADER
 
 And then run command `:BundleInstall`
 
