@@ -2,7 +2,7 @@
 *     File Name           :     README.md
 *     Created By          :     shanzi
 *     Creation Date       :     [2012-10-04 01:10]
-*     Last Modified       :     [2013-02-22 22:33]
+*     Last Modified       :     [2013-04-05 00:48]
 *     Description         :     Introduction to autoHEADER
 *********************************************************************************-->
 
@@ -53,9 +53,7 @@ To enable or disable autoHEADER by hand , use `:AutoHeaderEnable` and `:AutoHead
 2. `g:autoHEADER_default_author`
     The default author name displayed follows _Creation By_ , the default value is
     your $USER environment varible.
-3. `g:autoHEADER_default_licence`
-    Default licence for new source file. the place holder is "all right reserved"
-4. `g:autoHEADER_fill_char_repeat`
+3. `g:autoHEADER_fill_char_repeat`
     Repeat of chars on top and at bottom of the comment block.
     The default value is 80.
 
