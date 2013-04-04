@@ -2,7 +2,7 @@
 "     File Name           :     autoHEADER.vim
 "     Created By          :     shanzi
 "     Creation Date       :     [2012-10-04 01:07]
-"     Last Modified       :     [2012-10-04 23:47]
+"     Last Modified       :     [2013-04-05 00:47]
 "     Description         :     Envoke autoHEADER and define command
 "--------------------------------------------------------------------------------
 
@@ -22,13 +22,6 @@ endif
 
 if !exists('g:autoHEADER_default_author')
     let g:autoHEADER_default_author=$USER
-endif
-
-
-if !exists('g:autoHEADER_default_licence')
-    let g:autoHEADER_default_licence = 
-                \ g:autoHEADER_default_author
-                \ . ' (c) ' . strftime('%Y')  . ' | all rights reserved'
 endif
 
 

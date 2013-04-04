@@ -2,7 +2,7 @@
 "     File Name           :     autoHEADER.vim
 "     Created By          :     shanzi
 "     Creation Date       :     [2012-10-03 23:53]
-"     Last Modified       :     [2012-10-05 00:31]
+"     Last Modified       :     [2013-04-05 00:46]
 "     Description         :     Auto insert comment header block for varies
 "                               programing language
 "--------------------------------------------------------------------------------
@@ -19,7 +19,7 @@ let s:style_list = [
             \                 'php' : '?>',
             \                 'jsp' : '%>',
             \                 }},
-            \    { 'style' : ['#'  , '#' , ''  , '#' ] , 'ft' : [ 'python' , 'ruby', 'perl' , 'sh' ] , 
+            \    { 'style' : ['#'  , '#' , ''  , '#' ] , 'ft' : [ 'python' ,'python.django','ruby', 'perl' , 'sh','coffee' ] , 
             \      'prefix' : {
             \                 'python' : '#! /usr/bin/env python',
             \                 'ruby' : '#! /usr/bin/env ruby',
@@ -47,7 +47,6 @@ fun! s:insert_header_with_ft(ft)
                         \ ['Created By' , g:autoHEADER_default_author],
                         \ ['Creation Date' , '[' . strftime("%Y-%m-%d %H:%M") . ']'],
                         \ ['Last Modified' , '[AUTO_UPDATE_BEFORE_SAVE]'],
-                        \ ['Licence' , g:autoHEADER_default_licence],
                         \ ['Description' , ' '],]
 
             if  type(prefix) == type({})
